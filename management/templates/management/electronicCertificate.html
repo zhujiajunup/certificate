@@ -1,0 +1,150 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>查看证书详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static '/plugin/bootstrap/css/bootstrap.min.css'  %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static '/plugin/awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/plugin/fonts/css/font-awesome.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/plugin/jquery/css/chosen.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/plugin/ace/css/ace.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/plugin/ace/css/ace-rtl.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/plugin/ace/css/ace-skins.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/plugin/demo/css/demo.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static '/plugin/layui/laydate/need/laydate.css' %}"/>
+    <link rel="stylesheet" href="{% static '/plugin/layui/css/layui.css' %}"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/plugin/ace/css/ace-ie.min.css" />
+    <![endif]-->
+    <script src="{% static '/plugin/ace/js/ace-extra.min.js' %}"></script>
+    <!--[if lt IE 9]>
+    <script src="{% static '/plugin/other/js/html5shiv.js' %}"></script>
+    <script src="{% static '/plugin/other/js/respond.min.js' %}"></script>
+    <![endif]-->
+    <!--[if !IE]> -->
+    <script type="text/javascript"  src="{% static '/plugin/jquery/jquery-1.9.1.min.js' %}"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">window.jQuery || document.write("<script src='/static/plugin/jquery/jquery-1.10.2.min.js'>"+"<"+"script>");</script>
+    <![endif]-->
+    <script type="text/javascript">
+        if("ontouchend" in document) document.write("<script src='/static/plugin/jquery/jquery.mobile.custom.min.js'>"+"<"+"script>");
+    </script>
+    <script src="{% static '/plugin/bootstrap/js/bootstrap.min.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/plugin/bootstrap/js/typeahead-bs2.min.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/plugin/ace/js/ace-elements.min.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/plugin/ace/js/ace.min.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/plugin/layui/layer/layer.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/layui/layui.all.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/other/js/lrtk.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/vue/vue.min.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/other/js/common.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/echart/echarts.min.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/other/js/base.parse.js' %}" type="text/javascript"></script>
+    <script src="{% static '/plugin/base/validator.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/plugin/demo/demo.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/js/system/pic_tab.js' %}" type="text/javascript" ></script>
+    <script src="{% static '/js/uploadFile/mongoDBfile.js' %}"></script>
+
+    <link rel="stylesheet"
+          href="{% static '/plugin/zTree/css/zTreeStyle/zTreeStyle.css' %}"
+          type="text/css">
+    <link rel="stylesheet"
+          href="{% static '/plugin/easyUi/css/easyui.css' %}" />
+    <link rel="stylesheet"
+          href="{% static '/css/uploadFile/upload.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/skin_/form.css' %}" />
+    <script src="{% static '/js/uploadFile/file.js' %}"></script>
+    <script src="{% static '/js/uploadFile/upload.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static '/plugin/zTree/js/jquery.ztree.all-3.5.min.js' %}"></script>
+    <script src="{% static '/plugin/easyUi/js/jquery.easyui.min.js' %}"></script>
+    <script src="{% static '/plugin/base/basic.js' %}"></script>
+    <style type="text/css">
+        td.col-xs-4{
+            border:1px solid #ccc;
+            text-align:left;
+            height:40px;
+        }
+        td.col-xs-6{
+            border:1px solid #ccc;
+            text-align:left;
+            height:40px;
+        }
+    </style>
+</head>
+<body>
+<div id="viewDiv" class="page-content clearfix switchPanel" style="height: 100%;overflow: auto;">
+    <form id="viewForm" class="form form-horizontal" role="form">
+        <div id="products_style">
+            <div class="search_style" style="border: 0;margin-top: 0;padding:0">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="column">
+                            <span class="current">证书信息</span>
+                        </div>
+                        <table class="kv-table">
+                            <tbody>
+                            <tr>
+                                <td class="col-xs-4 kv-lable">姓名</td>
+                                <td id="name" class="col-xs-4" >{{ certificate_info.name }}</td>
+                                <td rowspan="3" class="col-xs-4" style="padding: 0;border: 1px solid #ccc;">
+                                    <img id='imageId' alt="头像" style="width: 70px;" src="{% static certificate_info.image_id.url %}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">性别</td>
+                                <td id="gender" class="col-xs-6" >{{ certificate_info.gender }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">身份证号</td>
+                                <td id="identificationNumber" class="col-xs-6">{{ certificate_info.identification_number }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">企业名称</td>
+                                <td colspan="3" id="etpName" class="col-xs-6" >{{ certificate_info.etp_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">职务</td>
+                                <td colspan="3" id="technicalTitle" class="col-xs-6" >{{ certificate_info.technical_title }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">证书编号</td>
+                                <td colspan="3" id="certificateCode" class="col-xs-6" >{{ certificate_info.certificate_code }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">发证时间</td>
+                                <td colspan="3" id="issuingDate" class="col-xs-6">{{ certificate_info.issuing_date|date:'Y-m-d' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">证书有效期</td>
+                                <td colspan="3" id="certificateValidity" class="col-xs-6">{{ certificate_info.certificate_validity|date:'Y-m-d' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6 kv-lable">发证单位</td>
+                                <!-- <td colspan="3" id="issuingOrgan"class="col-xs-6"></td> -->
+                                <td colspan="3" id="daiding" class="col-xs-6">江西省住房和城乡建设厅岗位培训发证领导小组办公室</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var path = '';
+</script>
+<!--<script src="{% static '/js/certificateManagement/electronicCertificate.js' %}"></script>-->
+</body>
+</html>
