@@ -202,4 +202,4 @@ MEDIA_ROOT = 'static/media/'
 QR_ROOT = MEDIA_ROOT+'qr'
 MEDIA_URL = 'media/'
 
-APPLICATION_ADDRESS = 'http://localhost:8000'
+APPLICATION_ADDRESS = 'http://localhost:8004'

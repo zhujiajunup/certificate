@@ -23,6 +23,7 @@ class CertificateAdmin(admin.ModelAdmin):
                     'gender',
                     'identification_number',
                     'certificate_code',
+                    'etp_name',
                     'technical_title',
                     'issuing_date',
                     'certificate_validity',
