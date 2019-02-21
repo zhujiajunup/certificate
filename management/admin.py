@@ -12,6 +12,7 @@ import os
 import random
 import string
 import logging
+
 # Register your models here.
 logger = logging.getLogger(__name__)
 
@@ -40,18 +41,19 @@ class CertificateAdmin(admin.ModelAdmin):
         def gen_nsukey():
             keys = []
             for _ in range(226):
-                keys = keys+random.sample(string.ascii_letters + string.digits + '%', 1)
+                keys = keys + random.sample(string.ascii_letters + string.digits + '%', 1)
             return ''.join(keys)
 
         info = CertificateInfo.objects.get(md_5=md_5)
         if len(md_5) > 21:
-            md_5 = md_5[:8]+'-'+md_5[8:12]+'-'+md_5[12:16]+'-'+md_5[16:20]+'-'+md_5[20:]
+            md_5 = md_5[:8] + '-' + md_5[8:12] + '-' + md_5[12:16] + '-' + md_5[16:20] + '-' + md_5[20:]
         context = settings.APPLICATION_ADDRESS + reverse('management:certificate') + \
                   '?id=' + md_5 + '&nsukey=' + gen_nsukey()
         img = gen_qr_code(context)
 
         response = HttpResponse(content_type='image/png')
-        response['Content-Disposition'] = 'attachment;filename="{0}"'.format('qr-'+info.identification_number+'.jpg')
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format('qr-' + info.identification_number + '_' +
+                                                                             info.certificate_code + '.jpg')
         img.save(response, 'png')
         return response
 
@@ -71,6 +73,7 @@ class CertificateAdmin(admin.ModelAdmin):
             '<a class="button" href="{}">生成二维码</a>&nbsp;',
             reverse('admin:gen-qr', args=[obj.md_5]),
         )
+
     account_actions.short_description = 'Account Actions'
 
     pass

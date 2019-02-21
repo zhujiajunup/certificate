@@ -1,6 +1,7 @@
 import logging
 
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 
 from .models import CertificateInfo
 
@@ -11,6 +12,13 @@ logger = logging.getLogger(__name__)
 def plugin_redirect(request):
     logger.info(request.path)
     pass
+
+
+def update_md5(request):
+    all_info = CertificateInfo.objects.all()
+    for info in all_info:
+        info.save()
+    return HttpResponse('successful')
 
 
 def certificate_detail(request):

@@ -23,7 +23,9 @@ class CertificateInfo(models.Model):
     image_tag.short_description = 'Image'
 
     def save(self, *args, **kwargs):
-        self.md_5 = hashlib.md5(self.identification_number.encode(encoding='UTF-8')).hexdigest()
+
+        super(CertificateInfo, self).save(*args, **kwargs)
+        self.md_5 = hashlib.md5(str(self.id).encode(encoding='UTF-8')).hexdigest()
         super(CertificateInfo, self).save(*args, **kwargs)
 
     class Meta:
