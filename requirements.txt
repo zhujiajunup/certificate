@@ -137,7 +137,7 @@ py==1.4.34
 pyasn1==0.4.4
 pyasn1-modules==0.2.2
 pybloom==2.0.0
-pycares==2.3.0
+pycares==4.2.0
 pycodestyle==2.3.1
 pycosat==0.6.2
 pycparser==2.19
